@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+.idea/
+.vscode/
+
+# Large model files
+*.bin
+*.pth
+*.pt
+*.safetensors
+
+# Downloaded large contents (keep structure)
+input/pretrain_stage_1/
+input/finetuning_stage_1_12k/
+toolkit/data-juicer/
+toolkit/training/model_zoo/
+toolkit/training/data/
+toolkit/training/wandb/
+toolkit/training/work_dirs/
+
+# Large training outputs (keep important files)
+output/training_dirs/*/pytorch_model.bin
+output/training_dirs/*/model.safetensors
+output/training_dirs/*/optimizer.pt
+output/training_dirs/*/scheduler.pt
+
+# Keep important small files
+!output/training_dirs/*/config.json
+!output/training_dirs/*/adapter_config.json
+!output/training_dirs/*/adapter_model.bin
+!output/training_dirs/*/non_lora_trainables.bin
+!output/training_dirs/*/merge_info.json
+!output/training_dirs/*/*.log
+
+# Large data files (keep analysis files)
+output/processed_data/*.jsonl
+!output/processed_data/*_stats.jsonl
+!output/processed_data/test_*.jsonl
+
+# Keep all analysis and result files
+!output/processed_data/*.md
+!output/processed_data/*.json
+!output/eval_results/
+!solution/
+!toolkit/
+
+# Logs and cache
+*.log
+logs/
+.cache/
+wandb/
+
+# OS files
+.DS_Store
+Thumbs.db

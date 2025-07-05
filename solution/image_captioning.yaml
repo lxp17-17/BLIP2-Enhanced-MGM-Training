@@ -1,0 +1,8 @@
+dataset_path: ../../input/pretrain_stage_1_10k/mgm_pretrain_stage_1_10k.jsonl
+export_path: ../../output/image_captioning_output/res_10k.jsonl
+data_probe_ratio: 0.01  # 只处理1%数据进行测试
+
+process:
+  - image_captioning_mapper:
+      hf_img2seq: 'Salesforce/blip2-opt-2.7b'  # You can replace this path to a local downloaded HF model
+      keep_original_sample: false  # we only need the recaptioned captions

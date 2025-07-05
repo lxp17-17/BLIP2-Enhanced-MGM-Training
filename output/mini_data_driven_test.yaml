@@ -1,0 +1,25 @@
+data_probe_ratio: 0.005
+dataset_path: ../../input/pretrain_stage_1_10k/mgm_pretrain_stage_1_10k.jsonl
+eoc_special_token: <|__dj__eoc|>
+export_path: ../../output/mini_test_data_driven.jsonl
+image_key: images
+image_special_token: <__dj__image>
+np: 4
+open_monitor: true
+process:
+- text_length_filter:
+    max_len: 100
+    min_len: 4
+- image_shape_filter:
+    any_or_all: any
+    min_height: 224
+    min_width: 224
+- image_captioning_mapper:
+    hf_img2seq: Salesforce/blip2-opt-2.7b
+    keep_original_sample: true
+- image_text_similarity_filter:
+    hf_clip: openai/clip-vit-base-patch32
+    max_score: 1.0
+    min_score: 0.15
+project_name: mini-data-driven-test
+text_keys: text

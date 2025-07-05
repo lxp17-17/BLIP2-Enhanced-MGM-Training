@@ -1,0 +1,163 @@
+# 高级Data-Juicer数据处理与合成策略
+# 目标: 超越简单重新标注，创建高质量多模态训练数据
+
+project_name: 'advanced-multimodal-data-synthesis'
+dataset_path: 'input/pretrain_stage_1_10k/mgm_pretrain_stage_1_10k.jsonl'
+export_path: 'output/processed_data/processed_data.jsonl'
+
+# 处理配置
+np: 8                                                     # 并行处理数
+text_keys: 'text'
+image_key: 'images'
+image_special_token: '<__dj__image>'
+eoc_special_token: '<|__dj__eoc|>'
+
+# 开启监控和追踪
+open_monitor: true
+open_tracer: true
+trace_num: 5
+
+# 多阶段数据处理流水线
+process:
+  # ==================== 阶段1: 数据清洗与标准化 ====================
+  
+  # 文本清洗
+  - fix_unicode_mapper:                                   # 修复Unicode错误
+  - punctuation_normalization_mapper:                     # 标准化标点符号
+  - whitespace_normalization_mapper:                      # 标准化空白字符
+  - clean_html_mapper:                                    # 清理HTML标签
+  - clean_links_mapper:                                   # 清理链接
+  - clean_email_mapper:                                   # 清理邮箱地址
+  
+  # ==================== 阶段2: 质量过滤 ====================
+  
+  # 文本质量过滤
+  - text_length_filter:                                   # 文本长度过滤
+      min_len: 10                                           # 最小长度10字符
+      max_len: 500                                          # 最大长度500字符
+  
+  - alphanumeric_filter:                                  # 字母数字比例过滤
+      tokenization: false
+      min_ratio: 0.5                                        # 至少50%字母数字字符
+      max_ratio: 1.0
+  
+  - character_repetition_filter:                          # 字符重复过滤
+      rep_len: 5                                            # 检查5字符重复
+      max_ratio: 0.1                                        # 最大重复率10%
+  
+  - word_repetition_filter:                               # 词汇重复过滤
+      lang: en
+      tokenization: false
+      rep_len: 3                                            # 检查3词重复
+      max_ratio: 0.15                                       # 最大重复率15%
+  
+  - special_characters_filter:                            # 特殊字符过滤
+      min_ratio: 0.0
+      max_ratio: 0.3                                        # 最大特殊字符率30%
+  
+  - flagged_words_filter:                                 # 有害词汇过滤
+      lang: en
+      tokenization: false
+      max_ratio: 0.0                                        # 零容忍有害内容
+  
+  # 图像质量过滤
+  - image_size_filter:                                    # 图像大小过滤
+      min_size: "10KB"                                      # 最小10KB
+      max_size: "10MB"                                      # 最大10MB
+      any_or_all: any
+  
+  - image_shape_filter:                                   # 图像尺寸过滤
+      min_width: 224                                        # 最小宽度224px
+      min_height: 224                                       # 最小高度224px
+      max_width: 2048                                       # 最大宽度2048px
+      max_height: 2048                                      # 最大高度2048px
+      any_or_all: any
+  
+  - image_aspect_ratio_filter:                            # 图像宽高比过滤
+      min_ratio: 0.25                                       # 最小宽高比1:4
+      max_ratio: 4.0                                        # 最大宽高比4:1
+      any_or_all: any
+  
+  - image_nsfw_filter:                                    # NSFW内容过滤
+      hf_nsfw_model: 'Falconsai/nsfw_image_detection'       # 使用NSFW检测模型
+      score_threshold: 0.3                                 # 阈值0.3
+      any_or_all: any
+  
+  # ==================== 阶段3: 多模态对齐优化 ====================
+  
+  - image_text_similarity_filter:                        # 图文相似度过滤
+      hf_clip: 'openai/clip-vit-large-patch14'             # 使用大型CLIP模型
+      min_score: 0.25                                       # 最小相似度0.25
+      max_score: 1.0
+  
+  - image_text_matching_filter:                           # 图文匹配度过滤
+      hf_blip: 'Salesforce/blip-itm-large-coco'            # 使用大型BLIP模型
+      min_score: 0.4                                        # 最小匹配度0.4
+      max_score: 1.0
+  
+  # ==================== 阶段4: 数据增强与合成 ====================
+  
+  # 高质量图像描述生成
+  - image_captioning_mapper:                              # BLIP2图像描述
+      hf_img2seq: 'Salesforce/blip2-flan-t5-xl'            # 使用更大的模型
+      keep_original_sample: true                            # 保留原始样本
+      caption_key: 'blip2_caption'                          # 新字段存储BLIP2描述
+  
+  - image_captioning_from_gpt4v_mapper:                   # GPT-4V高质量描述
+      api_model: 'gpt-4-vision-preview'                     # 使用GPT-4V
+      api_endpoint: null                                    # 需要配置API端点
+      prompt: 'Describe this image in detail, focusing on visual elements, objects, scene, and context.'
+      keep_original_sample: true
+      caption_key: 'gpt4v_caption'                          # 新字段存储GPT-4V描述
+  
+  # 图像标签生成
+  - image_tagging_mapper:                                 # 图像标签生成
+      hf_tagger: 'microsoft/DiT-base-finetuned-ade20k'     # 使用场景分割模型
+      keep_original_sample: true
+      tag_key: 'image_tags'                                 # 新字段存储标签
+  
+  # 文本增强
+  - sentence_augmentation_mapper:                         # 句子增强
+      aug_num: 2                                            # 每个样本生成2个增强版本
+      keep_original_sample: true
+  
+  # ==================== 阶段5: 高级合成策略 ====================
+  
+  # 多模态问答生成
+  - generate_qa_from_text_mapper:                         # 基于文本生成QA
+      api_model: 'gpt-3.5-turbo'
+      prompt_template: 'Based on the image description: {text}, generate 3 diverse question-answer pairs about the visual content.'
+      qa_format: 'conversation'
+      keep_original_sample: true
+  
+  # 实体关系提取
+  - extract_entity_relation_mapper:                       # 提取实体关系
+      hf_ner: 'dbmdz/bert-large-cased-finetuned-conll03-english'
+      keep_original_sample: true
+      entity_key: 'entities'
+  
+  # 关键词提取
+  - extract_keyword_mapper:                               # 提取关键词
+      lang: 'en'
+      top_k: 10                                             # 提取前10个关键词
+      keep_original_sample: true
+      keyword_key: 'keywords'
+  
+  # ==================== 阶段6: 最终质量控制 ====================
+  
+  # 困难样本挖掘
+  - perplexity_filter:                                    # 困惑度过滤
+      lang: en
+      min_ppl: 50                                           # 最小困惑度50
+      max_ppl: 1000                                         # 最大困惑度1000
+  
+  # 去重
+  - document_minhash_deduplicator:                        # MinHash去重
+      tokenization: 'space'
+      window_size: 5
+      num_permutations: 256
+      jaccard_threshold: 0.8                               # Jaccard相似度阈值
+  
+  - image_deduplicator:                                   # 图像去重
+      method: 'phash'                                       # 使用感知哈希
+      consider_text: true                                   # 考虑文本内容

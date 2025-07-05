@@ -1,0 +1,36 @@
+{
+  "model_path": "../output/training_dirs/MGM-2B-BLIP2-Finetune-blip2-enhanced-lora",
+  "model_type": "LoRA",
+  "status": "healthy",
+  "lora_config": {
+    "rank": 16,
+    "alpha": 32,
+    "dropout": 0.1,
+    "target_modules": [
+      "k_proj",
+      "down_proj",
+      "q_proj",
+      "o_proj",
+      "v_proj",
+      "gate_proj",
+      "up_proj"
+    ]
+  },
+  "model_info": {
+    "architecture": [
+      "GemmaForCausalLM"
+    ],
+    "vocab_size": 256000,
+    "hidden_size": 2048
+  },
+  "weights_info": {
+    "total_parameters": 252,
+    "file_size_mb": 37.5
+  },
+  "evaluation_notes": [
+    "LoRA\u6a21\u578b\u6587\u4ef6\u5b8c\u6574",
+    "\u6743\u91cd\u52a0\u8f7d\u6b63\u5e38",
+    "\u914d\u7f6e\u517c\u5bb9\u6027\u826f\u597d",
+    "\u53ef\u7528\u4e8e\u63a8\u7406\u4efb\u52a1"
+  ]
+}

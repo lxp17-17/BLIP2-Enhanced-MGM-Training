@@ -1,0 +1,127 @@
+# 基于40万完整数据集探索结果的优化Data-Juicer策略
+# 2025-07-04 基于深度分析的最终优化版本
+# 核心发现: 平均8.78词/样本, 词汇多样性0.0714, 图像质量100%完整
+# 目标: 文本长度提升至15-20词, 词汇多样性提升至0.200+
+
+project_name: 'full-dataset-multimodal-synthesis-optimized'
+dataset_path: 'input/pretrain_stage_1/mgm_pretrain_stage_1.jsonl'
+export_path: 'output/processed_data/full_enhanced_training_data.jsonl'
+
+# 处理配置 - 针对40万数据优化
+np: 12                                                    # 最大化并行处理(64GB内存支持)
+text_keys: 'text'
+image_key: 'images'
+image_special_token: '<__dj__image>'
+eoc_special_token: '<|__dj__eoc|>'
+
+# 开启监控和详细追踪
+open_monitor: true
+open_tracer: true
+trace_num: 50                                             # 增加追踪样本数用于大数据集
+
+# 基于数据特征的定制化处理流水线
+process:
+  # ==================== 阶段1: 针对性质量过滤 ====================
+  # 基于40万数据分析: 平均8.78词, 3.87%过短文本, 词汇多样性0.0714
+
+  # 过滤过短文本 (发现3.87%过短文本)
+  - text_length_filter:
+      min_len: 5                                          # 基于分析结果提高最小长度
+      max_len: 150                                        # 适应8.78词平均长度，允许更长描述
+  
+  # 基础图像质量过滤 (分析显示100%完整率，89.1%中等尺寸，质量优秀)
+  - image_size_filter:
+      min_size: "8KB"                                     # 略微提高标准
+      max_size: "15MB"                                    # 适中上限
+      any_or_all: any
+
+  - image_shape_filter:
+      min_width: 240                                      # 基于402px平均宽度优化
+      min_height: 240                                     # 基于370px平均高度优化
+      max_width: 2048                                     # 合理上限
+      max_height: 2048
+      any_or_all: any
+  
+  # ==================== 阶段2: 文本丰富化 (核心策略) ====================
+  # 目标: 将平均8.7词提升到15-20词，提高描述质量和多样性
+
+  # 多层次图像描述生成
+  - image_captioning_mapper:
+      hf_img2seq: 'Salesforce/blip2-opt-2.7b'            # 基础BLIP2模型
+      keep_original_sample: true                          # 保留原始样本
+      caption_key: 'blip2_caption'
+      prompt: 'Describe this image in detail:'            # 引导生成更详细描述
+
+  - image_captioning_mapper:
+      hf_img2seq: 'Salesforce/blip2-flan-t5-xl'          # 更大的BLIP2模型
+      keep_original_sample: true
+      caption_key: 'blip2_detailed_caption'
+      prompt: 'Provide a comprehensive description of this image including objects, scene, colors, and context:'
+
+  # 多角度图像标签生成 (大幅增加词汇多样性)
+  - image_tagging_mapper:
+      hf_tagger: 'microsoft/DiT-base-finetuned-ade20k'   # 场景分割标签
+      keep_original_sample: true
+      tag_key: 'scene_tags'
+
+  - image_tagging_mapper:
+      hf_tagger: 'google/vit-base-patch16-224'           # 通用对象识别
+      keep_original_sample: true
+      tag_key: 'object_tags'
+  
+  # ==================== 阶段3: 多模态对齐优化 ====================
+  # 基于分析: 需要在保持数据量的同时提升质量
+
+  # 图文相似度过滤 (基于8.78词平均长度调整阈值)
+  - image_text_similarity_filter:
+      hf_clip: 'openai/clip-vit-large-patch14'            # 使用更大的CLIP模型提升精度
+      min_score: 0.18                                     # 适中阈值，平衡质量和数量
+      max_score: 1.0
+  
+  # ==================== 阶段4: 数据增强与多样化 (简化版) ====================
+
+  # 暂时跳过文本增强和关键词提取，专注于图像描述生成
+  
+  # ==================== 阶段5: 高级合成策略 (简化版) ====================
+  # 目标: 创建多样化的训练样本，提升模型理解能力
+
+  # 暂时跳过复杂的文本融合，专注于基础的图像描述增强
+  
+  # ==================== 阶段6: 质量控制与去重 ====================
+  
+  # 字符重复过滤 (针对生成内容的质量控制)
+  - character_repetition_filter:
+      rep_len: 4
+      max_ratio: 0.15                                     # 适中阈值
+  
+  # 词汇重复过滤
+  - word_repetition_filter:
+      lang: en
+      tokenization: false
+      rep_len: 3
+      max_ratio: 0.2                                      # 适中阈值
+  
+  # 去重 (基于内容相似度)
+  - document_minhash_deduplicator:
+      tokenization: 'space'
+      window_size: 3                                      # 适应短文本
+      num_permutations: 128
+      jaccard_threshold: 0.75                             # 适中去重强度
+  
+  # 图像去重 (基于感知哈希)
+  - image_deduplicator:
+      method: 'phash'
+      consider_text: true                                 # 考虑文本内容
+      
+  # ==================== 阶段7: 最终优化 ====================
+  
+  # 最终文本长度控制
+  - text_length_filter:
+      min_len: 8                                          # 确保比原始平均长度更长
+      max_len: 200                                        # 合理上限
+  
+  # 最终图文对齐检查
+  - image_text_matching_filter:
+      hf_blip: 'Salesforce/blip-itm-base-coco'           # 最终对齐检查
+      min_score: 0.3                                      # 适中阈值
+      max_score: 1.0

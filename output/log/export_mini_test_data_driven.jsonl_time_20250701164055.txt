@@ -1,0 +1,3 @@
+2025-07-01 16:40:55.389 | INFO     | data_juicer.config.config:init_setup_from_cfg:577 - dataset_path config is set and a valid local path
+2025-07-01 16:40:55.389 | DEBUG    | data_juicer.config.config:timing_context:35 - Initializing setup from config took 0.01 seconds
+error: Unrecognized arguments: --image_captioning_mapper.caption_key=blip2_caption

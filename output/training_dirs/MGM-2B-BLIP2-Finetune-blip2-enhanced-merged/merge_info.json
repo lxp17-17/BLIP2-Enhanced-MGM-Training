@@ -1,0 +1,7 @@
+{
+  "merged_from_lora": true,
+  "lora_model_path": "../output/training_dirs/MGM-2B-BLIP2-Finetune-blip2-enhanced-lora",
+  "base_model_path": "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/model_zoo/LLM/gemma/gemma-2b-it",
+  "merge_method": "mgm_copy_method",
+  "note": "MGM\u6a21\u578b\u4f7f\u7528\u6587\u4ef6\u590d\u5236\u65b9\u6cd5\uff0c\u4fdd\u7559LoRA\u7ed3\u6784\u7528\u4e8e\u63a8\u7406"
+}

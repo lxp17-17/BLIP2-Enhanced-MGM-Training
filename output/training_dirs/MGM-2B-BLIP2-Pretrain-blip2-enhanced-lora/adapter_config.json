@@ -1,0 +1,26 @@
+{
+  "auto_mapping": null,
+  "base_model_name_or_path": "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/model_zoo/LLM/gemma/gemma-2b-it",
+  "bias": "none",
+  "fan_in_fan_out": false,
+  "inference_mode": true,
+  "init_lora_weights": true,
+  "layers_pattern": null,
+  "layers_to_transform": null,
+  "lora_alpha": 32,
+  "lora_dropout": 0.1,
+  "modules_to_save": null,
+  "peft_type": "LORA",
+  "r": 16,
+  "revision": null,
+  "target_modules": [
+    "down_proj",
+    "o_proj",
+    "gate_proj",
+    "q_proj",
+    "up_proj",
+    "v_proj",
+    "k_proj"
+  ],
+  "task_type": "CAUSAL_LM"
+}

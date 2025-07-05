@@ -1,0 +1,176 @@
+=== [步骤1] 验证训练参数配置 ===
+=== [步骤2] 数据预处理 ===
+正在对数据集进行采样，最大样本数：200000
+2025-06-26 01:08:44.662 | INFO     | __main__:main:14 - Total number of samples in the input dataset: 10000
+2025-06-26 01:08:44.662 | INFO     | __main__:main:19 - Keep all samples in the input dataset.
+正在将DJ格式转换为LLaVA格式：../input/pretrain_stage_1_10k/mgm_pretrain_stage_1_10k.jsonl-200k.jsonl -> ../input/pretrain_stage_1_10k/mgm_pretrain_stage_1_10k.jsonl-200k.jsonl.json
+python: can't open file '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/data-juicer/tools/multimodal/data_juicer_format_to_target_format/dj_to_llava.py': [Errno 2] No such file or directory
+=== [步骤3] 开始模型训练 ===
+预训练模型将保存到：/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/../output/training_dirs/MGM-2B-Pretrain-default
+--- [阶段1] 开始预训练（学习图像-文本基础对齐） ---
+[2025-06-26 01:08:45,365] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-06-26 01:08:46,456] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-06-26 01:08:46,459] [WARNING] [runner.py:220:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+[2025-06-26 01:08:46,459] [INFO] [runner.py:610:main] cmd = /usr/bin/python3 -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMF19 --master_addr=127.0.0.1 --master_port=29500 --enable_each_rank_log=None /home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/train/train_mem.py --deepspeed /home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/scripts/zero2_offload.json  
+[2025-06-26 01:08:47,184] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-06-26 01:08:48,200] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-06-26 01:08:48,203] [INFO] [launch.py:146:main] WORLD INFO DICT: {'localhost': [0]}
+[2025-06-26 01:08:48,203] [INFO] [launch.py:152:main] nnodes=1, num_local_procs=1, node_rank=0
+[2025-06-26 01:08:48,203] [INFO] [launch.py:163:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0]})
+[2025-06-26 01:08:48,203] [INFO] [launch.py:164:main] dist_world_size=1
+[2025-06-26 01:08:48,203] [INFO] [launch.py:168:main] Setting CUDA_VISIBLE_DEVICES=0
+[2025-06-26 01:08:48,204] [INFO] [launch.py:256:main] process 160986 spawned with command: ['/usr/bin/python3', '-u', '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/train/train_mem.py', '--local_rank=0', '--deepspeed', '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/scripts/zero2_offload.json', ' ']
+Traceback (most recent call last):
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/train/train_mem.py", line 1, in <module>
+    from mgm.train.train import train
+ModuleNotFoundError: No module named 'mgm'
+[2025-06-26 01:08:49,205] [INFO] [launch.py:319:sigkill_handler] Killing subprocess 160986
+[2025-06-26 01:08:49,205] [ERROR] [launch.py:325:sigkill_handler] ['/usr/bin/python3', '-u', '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/train/train_mem.py', '--local_rank=0', '--deepspeed', '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/scripts/zero2_offload.json', ' '] exits with return code = 1
+train_mgm_2b_stage_1_10k_baseline.sh: 行 96: --model_name_or_path: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 97: --version: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 98: --data_path: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 99: --image_folder: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 100: --vision_tower: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 101: --vision_tower_aux: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 102: --mm_projector_type: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 103: --tune_mm_mlp_adapter: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 104: --mm_vision_select_layer: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 105: --mm_use_im_start_end: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 106: --mm_use_im_patch_token: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 107: --image_size_aux: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 108: --bf16: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 109: --output_dir: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 110: --num_train_epochs: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 111: --per_device_train_batch_size: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 112: --per_device_eval_batch_size: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 113: --gradient_accumulation_steps: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 114: --evaluation_strategy: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 115: --save_strategy: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 116: --save_steps: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 117: --save_total_limit: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 118: --learning_rate: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 119: --weight_decay: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 120: --warmup_ratio: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 121: --lr_scheduler_type: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 122: --logging_steps: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 123: --tf32: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 124: --model_max_length: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 125: --gradient_checkpointing: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 126: --dataloader_num_workers: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 127: --lazy_preprocess: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 128: --report_to: 未找到命令
+--- [阶段2] 开始指令微调（增强任务特定能力） ---
+微调模型将保存到：/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/../output/training_dirs/MGM-2B-Finetune-default
+[2025-06-26 01:08:51,469] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-06-26 01:08:52,604] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-06-26 01:08:52,607] [WARNING] [runner.py:220:fetch_hostfile] Unable to find hostfile, will proceed with training with local resources only.
+[2025-06-26 01:08:52,608] [INFO] [runner.py:610:main] cmd = /usr/bin/python3 -u -m deepspeed.launcher.launch --world_info=eyJsb2NhbGhvc3QiOiBbMF19 --master_addr=127.0.0.1 --master_port=29500 --enable_each_rank_log=None /home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/train/train_mem.py --deepspeed /home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/scripts/zero2_offload.json  
+[2025-06-26 01:08:53,304] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-06-26 01:08:54,325] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+[2025-06-26 01:08:54,328] [INFO] [launch.py:146:main] WORLD INFO DICT: {'localhost': [0]}
+[2025-06-26 01:08:54,328] [INFO] [launch.py:152:main] nnodes=1, num_local_procs=1, node_rank=0
+[2025-06-26 01:08:54,328] [INFO] [launch.py:163:main] global_rank_mapping=defaultdict(<class 'list'>, {'localhost': [0]})
+[2025-06-26 01:08:54,328] [INFO] [launch.py:164:main] dist_world_size=1
+[2025-06-26 01:08:54,328] [INFO] [launch.py:168:main] Setting CUDA_VISIBLE_DEVICES=0
+[2025-06-26 01:08:54,328] [INFO] [launch.py:256:main] process 161396 spawned with command: ['/usr/bin/python3', '-u', '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/train/train_mem.py', '--local_rank=0', '--deepspeed', '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/scripts/zero2_offload.json', ' ']
+Traceback (most recent call last):
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/train/train_mem.py", line 1, in <module>
+    from mgm.train.train import train
+ModuleNotFoundError: No module named 'mgm'
+[2025-06-26 01:08:55,328] [INFO] [launch.py:319:sigkill_handler] Killing subprocess 161396
+[2025-06-26 01:08:55,329] [ERROR] [launch.py:325:sigkill_handler] ['/usr/bin/python3', '-u', '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/train/train_mem.py', '--local_rank=0', '--deepspeed', '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/scripts/zero2_offload.json', ' '] exits with return code = 1
+train_mgm_2b_stage_1_10k_baseline.sh: 行 139: --model_name_or_path: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 140: --version: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 141: --data_path: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 142: --image_folder: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 143: --vision_tower: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 144: --vision_tower_aux: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 145: --pretrain_mm_mlp_adapter: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 146: --mm_projector_type: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 147: --mm_vision_select_layer: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 148: --mm_use_im_start_end: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 149: --mm_use_im_patch_token: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 150: --image_aspect_ratio: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 151: --group_by_modality_length: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 152: --image_size_aux: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 153: --bf16: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 154: --output_dir: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 155: --num_train_epochs: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 156: --per_device_train_batch_size: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 157: --per_device_eval_batch_size: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 158: --gradient_accumulation_steps: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 159: --evaluation_strategy: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 160: --save_strategy: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 161: --save_steps: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 162: --save_total_limit: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 163: --learning_rate: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 164: --weight_decay: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 165: --warmup_ratio: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 166: --lr_scheduler_type: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 167: --logging_steps: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 168: --tf32: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 169: --model_max_length: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 170: --gradient_checkpointing: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 171: --dataloader_num_workers: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 172: --lazy_preprocess: 未找到命令
+train_mgm_2b_stage_1_10k_baseline.sh: 行 173: --report_to: 未找到命令
+=== [步骤4] 开始模型评估 ===
+正在TextVQA数据集上进行推理评估...
+/home/robot/lhp/miniconda3/envs/Syn0625/lib/python3.10/site-packages/transformers/deepspeed.py:23: FutureWarning: transformers.deepspeed module is deprecated and will be removed in a future version. Please import deepspeed modules directly from transformers.integrations
+  warnings.warn(
+[2025-06-26 01:08:58,054] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-06-26 01:08:58,908] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+Traceback (most recent call last):
+  File "/home/robot/lhp/miniconda3/envs/Syn0625/lib/python3.10/runpy.py", line 187, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/home/robot/lhp/miniconda3/envs/Syn0625/lib/python3.10/runpy.py", line 110, in _get_module_details
+    __import__(pkg_name)
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/__init__.py", line 1, in <module>
+    from .model import MGMLlamaForCausalLM
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/model/__init__.py", line 1, in <module>
+    from .language_model.mgm_llama import MGMLlamaForCausalLM
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/model/language_model/mgm_llama.py", line 31, in <module>
+    from mgm.model.mgm_arch import MGMMetaModel, MGMMetaForCausalLM
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/model/mgm_arch.py", line 31, in <module>
+    from .multimodal_encoder.builder import build_vision_tower, build_vision_tower_aux
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/model/multimodal_encoder/builder.py", line 3, in <module>
+    from .eva_encoder import EVAVisionTower
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/model/multimodal_encoder/eva_encoder.py", line 15, in <module>
+    from timm.models.layers import drop_path, to_2tuple, trunc_normal_
+ModuleNotFoundError: No module named 'timm'
+/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/eval/textvqa.sh: 行 28: /home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/eval/../../output/eval_results/MGM-2B-Finetune-default/textvqa//bm1.jsonl: 没有那个文件或目录
+/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/eval/textvqa.sh: 行 32: /home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/eval/../../output/eval_results/MGM-2B-Finetune-default/textvqa//bm1.jsonl: 没有那个文件或目录
+正在MMBench数据集上进行推理评估...
+/home/robot/lhp/miniconda3/envs/Syn0625/lib/python3.10/site-packages/transformers/deepspeed.py:23: FutureWarning: transformers.deepspeed module is deprecated and will be removed in a future version. Please import deepspeed modules directly from transformers.integrations
+  warnings.warn(
+[2025-06-26 01:09:00,321] [INFO] [real_accelerator.py:254:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2025-06-26 01:09:01,166] [INFO] [logging.py:107:log_dist] [Rank -1] [TorchCheckpointEngine] Initialized with serialization = False
+Traceback (most recent call last):
+  File "/home/robot/lhp/miniconda3/envs/Syn0625/lib/python3.10/runpy.py", line 187, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/home/robot/lhp/miniconda3/envs/Syn0625/lib/python3.10/runpy.py", line 110, in _get_module_details
+    __import__(pkg_name)
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/__init__.py", line 1, in <module>
+    from .model import MGMLlamaForCausalLM
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/model/__init__.py", line 1, in <module>
+    from .language_model.mgm_llama import MGMLlamaForCausalLM
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/model/language_model/mgm_llama.py", line 31, in <module>
+    from mgm.model.mgm_arch import MGMMetaModel, MGMMetaForCausalLM
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/model/mgm_arch.py", line 31, in <module>
+    from .multimodal_encoder.builder import build_vision_tower, build_vision_tower_aux
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/model/multimodal_encoder/builder.py", line 3, in <module>
+    from .eva_encoder import EVAVisionTower
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/training/mgm/model/multimodal_encoder/eva_encoder.py", line 15, in <module>
+    from timm.models.layers import drop_path, to_2tuple, trunc_normal_
+ModuleNotFoundError: No module named 'timm'
+Traceback (most recent call last):
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/eval/../training/scripts/convert_mmbench_for_submission.py", line 23, in <module>
+    for pred in open(os.path.join(args.result_dir, f"{args.experiment}.jsonl")):
+FileNotFoundError: [Errno 2] No such file or directory: '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/eval/../../output/eval_results/MGM-2B-Finetune-default/mmbench/answers/mmbench_dev_20230712/MGM-2B-Finetune-default.jsonl'
+=== [步骤5] 整理输出文件 ===
+🎉 训练和推理全部完成！
+📁 训练模型保存位置：output/training_dirs/MGM-2B-Finetune-default
+📊 推理结果保存位置：output/eval_results/MGM-2B-Finetune-default
+📋 日志文件位置：
+   - 预训练日志：output/training_dirs/MGM-2B-Pretrain-default/pretrain.log
+   - 微调日志：output/training_dirs/MGM-2B-Finetune-default/finetuning.log

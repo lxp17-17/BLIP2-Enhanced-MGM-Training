@@ -1,0 +1,66 @@
+# BLIP2增强30K数据合成配置
+# 基于数据探索发现的问题：平均词数8.78词过于简单，词汇多样性0.0714严重不足
+# 使用BLIP2生成更丰富、详细的图像描述来提升数据质量
+
+project_name: 'blip2-enhanced-30k-synthesis'
+dataset_path: '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/output/processed_data/basic_enhanced_data_30k.jsonl'
+export_path: '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/output/processed_data/blip2_enhanced_30k_data.jsonl'
+
+# 基础配置 - 基于之前成功的经验
+np: 1  # 单进程避免GPU内存冲突
+text_keys: 'text'
+image_key: 'images'
+executor_type: default
+
+# 开启监控和追踪
+open_monitor: true
+open_tracer: true
+trace_num: 100
+
+# BLIP2图像描述增强处理流程
+process:
+  # 第一步：使用BLIP2生成丰富的图像描述
+  - image_captioning_mapper:
+      hf_img2seq: '/home/robot/.cache/modelscope/hub/models/goldsj/blip2-opt-2.7b'
+      keep_original_sample: false  # 替换原始描述，提升质量
+      caption_num: 1  # 每张图片生成1个描述
+      batch_size: 1  # 保持稳定的内存使用
+      mem_required: 8  # 8GB GPU内存需求
+      # 不使用复杂prompt，基于测试经验，无prompt效果最好
+      
+  # 第二步：质量过滤 - 确保生成的描述质量
+  - words_num_filter:  # 过滤词数，确保描述足够丰富
+      lang: en
+      tokenization: false
+      min_num: 6   # 最少6个词，比原始8.78词稍微降低以保留更多数据
+      max_num: 60  # 最多60个词，允许详细描述
+      
+  - word_repetition_filter:  # 过滤重复词汇，提升多样性
+      lang: en
+      tokenization: false
+      rep_len: 1
+      min_ratio: 0.0
+      max_ratio: 0.3  # 允许30%的重复率
+      
+  # 第三步：图像质量过滤
+  - image_shape_filter:  # 确保图像尺寸合适
+      min_width: 224   # 降低最小尺寸要求，保留更多数据
+      max_width: 1024  # 提高最大尺寸限制
+      min_height: 224
+      max_height: 1024
+      any_or_all: any
+      
+  - image_watermark_filter:  # 过滤水印图像
+      hf_watermark_model: amrul-hzz/watermark_detector
+      prob_threshold: 0.8  # 水印概率阈值
+      any_or_all: any
+      
+  # 第四步：文本质量进一步优化
+  - character_repetition_filter:  # 过滤字符重复
+      rep_len: 5
+      min_ratio: 0.0
+      max_ratio: 0.15  # 控制字符重复率
+      
+  - text_length_filter:  # 最终文本长度控制
+      min_len: 20   # 最少20个字符
+      max_len: 300  # 最多300个字符，允许详细描述

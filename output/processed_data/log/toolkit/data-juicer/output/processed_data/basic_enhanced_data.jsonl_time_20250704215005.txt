@@ -1,0 +1,252 @@
+2025-07-04 21:50:05.229 | WARNING  | data_juicer.config.config:init_setup_from_cfg:582 - dataset_path [./input/pretrain_stage_1/mgm_pretrain_stage_1.jsonl] is not a valid local path, AND dataset is not present. Please check and retry, otherwise we will treat dataset_path as a remote dataset or a mixture of several datasets.
+2025-07-04 21:50:05.230 | DEBUG    | data_juicer.config.config:timing_context:35 - Initializing setup from config took 0.01 seconds
+2025-07-04 21:50:05.252 | DEBUG    | data_juicer.config.config:timing_context:35 - Updating operator process took 0.02 seconds
+2025-07-04 21:50:05.252 | INFO     | data_juicer.config.config:config_backup:879 - Back up the input config file [/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/solution/basic_data_synthesis.yaml] into the work_dir [/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/output/processed_data]
+2025-07-04 21:50:05.256 | INFO     | data_juicer.config.config:display_config:901 - Configuration table: 
+╒══════════════════════════╤════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╕
+│ key                      │ values                                                                                                                         │
+╞══════════════════════════╪════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╡
+│ config                   │ [Path_fr(/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/solution/basic_data_synthesis.yaml)]                            │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ auto                     │ False                                                                                                                          │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ auto_num                 │ 1000                                                                                                                           │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ hpo_config               │ None                                                                                                                           │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ data_probe_algo          │ 'uniform'                                                                                                                      │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ data_probe_ratio         │ 1.0                                                                                                                            │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ project_name             │ 'basic-full-dataset-synthesis'                                                                                                 │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ executor_type            │ 'default'                                                                                                                      │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ dataset_path             │ './input/pretrain_stage_1/mgm_pretrain_stage_1.jsonl'                                                                          │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ dataset                  │ []                                                                                                                             │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ generated_dataset_config │ None                                                                                                                           │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ validators               │ []                                                                                                                             │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ work_dir                 │ '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/output/processed_data'                                                  │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ export_path              │ '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/data-juicer/output/processed_data/basic_enhanced_data.jsonl'    │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ export_shard_size        │ 0                                                                                                                              │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ export_in_parallel       │ False                                                                                                                          │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ keep_stats_in_res_ds     │ False                                                                                                                          │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ keep_hashes_in_res_ds    │ False                                                                                                                          │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ np                       │ 8                                                                                                                              │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ text_keys                │ 'text'                                                                                                                         │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ image_key                │ 'images'                                                                                                                       │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ image_special_token      │ '<__dj__image>'                                                                                                                │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ audio_key                │ 'audios'                                                                                                                       │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ audio_special_token      │ '<__dj__audio>'                                                                                                                │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ video_key                │ 'videos'                                                                                                                       │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ video_special_token      │ '<__dj__video>'                                                                                                                │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ eoc_special_token        │ '<|__dj__eoc|>'                                                                                                                │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ suffixes                 │ []                                                                                                                             │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ turbo                    │ False                                                                                                                          │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ skip_op_error            │ True                                                                                                                           │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ use_cache                │ True                                                                                                                           │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ ds_cache_dir             │ '/home/robot/.cache/huggingface/datasets'                                                                                      │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ cache_compress           │ None                                                                                                                           │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ open_monitor             │ True                                                                                                                           │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ use_checkpoint           │ False                                                                                                                          │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ temp_dir                 │ None                                                                                                                           │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ open_tracer              │ True                                                                                                                           │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ op_list_to_trace         │ []                                                                                                                             │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ trace_num                │ 10                                                                                                                             │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ open_insight_mining      │ False                                                                                                                          │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ op_list_to_mine          │ []                                                                                                                             │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ op_fusion                │ False                                                                                                                          │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ fusion_strategy          │ 'probe'                                                                                                                        │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ adaptive_batch_size      │ False                                                                                                                          │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ process                  │ [{'text_length_filter': {'accelerator': None,                                                                                  │
+│                          │                          'audio_key': 'audios',                                                                                │
+│                          │                          'batch_size': 1000,                                                                                   │
+│                          │                          'cpu_required': 1,                                                                                    │
+│                          │                          'history_key': 'history',                                                                             │
+│                          │                          'image_key': 'images',                                                                                │
+│                          │                          'index_key': None,                                                                                    │
+│                          │                          'max_len': 200,                                                                                       │
+│                          │                          'mem_required': 0,                                                                                    │
+│                          │                          'min_len': 5,                                                                                         │
+│                          │                          'num_proc': 8,                                                                                        │
+│                          │                          'query_key': 'query',                                                                                 │
+│                          │                          'response_key': 'response',                                                                           │
+│                          │                          'skip_op_error': True,                                                                                │
+│                          │                          'stats_export_path': None,                                                                            │
+│                          │                          'text_key': 'text',                                                                                   │
+│                          │                          'turbo': False,                                                                                       │
+│                          │                          'video_key': 'videos',                                                                                │
+│                          │                          'work_dir': '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/output/processed_data'}},          │
+│                          │  {'image_shape_filter': {'accelerator': None,                                                                                  │
+│                          │                          'any_or_all': 'any',                                                                                  │
+│                          │                          'audio_key': 'audios',                                                                                │
+│                          │                          'batch_size': 1000,                                                                                   │
+│                          │                          'cpu_required': 1,                                                                                    │
+│                          │                          'history_key': 'history',                                                                             │
+│                          │                          'image_key': 'images',                                                                                │
+│                          │                          'index_key': None,                                                                                    │
+│                          │                          'max_height': 2048,                                                                                   │
+│                          │                          'max_width': 2048,                                                                                    │
+│                          │                          'mem_required': 0,                                                                                    │
+│                          │                          'min_height': 224,                                                                                    │
+│                          │                          'min_width': 224,                                                                                     │
+│                          │                          'num_proc': 8,                                                                                        │
+│                          │                          'query_key': 'query',                                                                                 │
+│                          │                          'response_key': 'response',                                                                           │
+│                          │                          'skip_op_error': True,                                                                                │
+│                          │                          'stats_export_path': None,                                                                            │
+│                          │                          'text_key': 'text',                                                                                   │
+│                          │                          'turbo': False,                                                                                       │
+│                          │                          'video_key': 'videos',                                                                                │
+│                          │                          'work_dir': '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/output/processed_data'}},          │
+│                          │  {'character_repetition_filter': {'accelerator': None,                                                                         │
+│                          │                                   'audio_key': 'audios',                                                                       │
+│                          │                                   'batch_size': 1000,                                                                          │
+│                          │                                   'cpu_required': 1,                                                                           │
+│                          │                                   'history_key': 'history',                                                                    │
+│                          │                                   'image_key': 'images',                                                                       │
+│                          │                                   'index_key': None,                                                                           │
+│                          │                                   'max_ratio': 0.15,                                                                           │
+│                          │                                   'mem_required': 0,                                                                           │
+│                          │                                   'min_ratio': 0.0,                                                                            │
+│                          │                                   'num_proc': 8,                                                                               │
+│                          │                                   'query_key': 'query',                                                                        │
+│                          │                                   'rep_len': 5,                                                                                │
+│                          │                                   'response_key': 'response',                                                                  │
+│                          │                                   'skip_op_error': True,                                                                       │
+│                          │                                   'stats_export_path': None,                                                                   │
+│                          │                                   'text_key': 'text',                                                                          │
+│                          │                                   'turbo': False,                                                                              │
+│                          │                                   'video_key': 'videos',                                                                       │
+│                          │                                   'work_dir': '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/output/processed_data'}}, │
+│                          │  {'word_repetition_filter': {'accelerator': None,                                                                              │
+│                          │                              'audio_key': 'audios',                                                                            │
+│                          │                              'batch_size': 1000,                                                                               │
+│                          │                              'cpu_required': 1,                                                                                │
+│                          │                              'history_key': 'history',                                                                         │
+│                          │                              'image_key': 'images',                                                                            │
+│                          │                              'index_key': None,                                                                                │
+│                          │                              'lang': 'en',                                                                                     │
+│                          │                              'max_ratio': 0.2,                                                                                 │
+│                          │                              'mem_required': 0,                                                                                │
+│                          │                              'min_ratio': 0.0,                                                                                 │
+│                          │                              'num_proc': 8,                                                                                    │
+│                          │                              'query_key': 'query',                                                                             │
+│                          │                              'rep_len': 3,                                                                                     │
+│                          │                              'response_key': 'response',                                                                       │
+│                          │                              'skip_op_error': True,                                                                            │
+│                          │                              'stats_export_path': None,                                                                        │
+│                          │                              'text_key': 'text',                                                                               │
+│                          │                              'tokenization': False,                                                                            │
+│                          │                              'turbo': False,                                                                                   │
+│                          │                              'video_key': 'videos',                                                                            │
+│                          │                              'work_dir': '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/output/processed_data'}}]      │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ percentiles              │ []                                                                                                                             │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ export_original_dataset  │ False                                                                                                                          │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ save_stats_in_one_file   │ False                                                                                                                          │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ ray_address              │ 'auto'                                                                                                                         │
+├──────────────────────────┼────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ debug                    │ False                                                                                                                          │
+╘══════════════════════════╧════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╛
+2025-07-04 21:50:05.257 | DEBUG    | data_juicer.config.config:timing_context:35 - Total config initialization time took 0.09 seconds
+2025-07-04 21:50:05.257 | INFO     | __main__:timing_context:15 - Loading configuration took 0.09 seconds
+2025-07-04 21:50:05.322 | INFO     | data_juicer.core.executor.default_executor:__init__:50 - Using cache compression method: [None]
+2025-07-04 21:50:05.322 | INFO     | data_juicer.core.executor.default_executor:__init__:55 - Setting up dataset builder...
+2025-07-04 21:50:05.322 | INFO     | data_juicer.core.data.dataset_builder:__init__:37 - found dataset_path setting: ./input/pretrain_stage_1/mgm_pretrain_stage_1.jsonl
+2025-07-04 21:50:05.323 | ERROR    | __main__:<module>:35 - An error has been caught in function '<module>', process 'MainProcess' (20763), thread 'MainThread' (137989664420928):
+Traceback (most recent call last):
+
+  File "/home/robot/lhp/miniconda3/envs/Syn0625/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+           │         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'data_juicer.tools', '__loader__': <_frozen_importlib_external.Sourc...
+           │         └ <code object <module> at 0x7d8036d599a0, file "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/data-juicer/tool...
+           └ <function _run_code at 0x7d80380cb130>
+  File "/home/robot/lhp/miniconda3/envs/Syn0625/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+         │     └ {'__name__': '__main__', '__doc__': None, '__package__': 'data_juicer.tools', '__loader__': <_frozen_importlib_external.Sourc...
+         └ <code object <module> at 0x7d8036d599a0, file "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/data-juicer/tool...
+
+> File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/data-juicer/tools/process_data.py", line 35, in <module>
+    main()
+    └ <function main at 0x7d7ea090dcf0>
+
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/data-juicer/tools/process_data.py", line 25, in main
+    executor = DefaultExecutor(cfg)
+               │               └ Namespace(config=[Path_fr(/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/solution/basic_data_synthesis.yaml)], auto=Fa...
+               └ <class 'data_juicer.core.executor.default_executor.DefaultExecutor'>
+
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/data-juicer/data_juicer/core/executor/default_executor.py", line 56, in __init__
+    self.dataset_builder = DatasetBuilder(self.cfg,
+    │                      │              │    └ Namespace(config=[Path_fr(/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/solution/basic_data_synthesis.yaml)], auto=Fa...
+    │                      │              └ <data_juicer.core.executor.default_executor.DefaultExecutor object at 0x7d7ea08eb400>
+    │                      └ <class 'data_juicer.core.data.dataset_builder.DatasetBuilder'>
+    └ <data_juicer.core.executor.default_executor.DefaultExecutor object at 0x7d7ea08eb400>
+
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/data-juicer/data_juicer/core/data/dataset_builder.py", line 38, in __init__
+    ds_configs = rewrite_cli_datapath(cfg.dataset_path)
+                 │                    │   └ './input/pretrain_stage_1/mgm_pretrain_stage_1.jsonl'
+                 │                    └ Namespace(config=[Path_fr(/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/solution/basic_data_synthesis.yaml)], auto=Fa...
+                 └ <function rewrite_cli_datapath at 0x7d7eac1b0430>
+
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/data-juicer/data_juicer/core/data/dataset_builder.py", line 213, in rewrite_cli_datapath
+    raise ValueError(
+
+ValueError: Unable to load the dataset from [./input/pretrain_stage_1/mgm_pretrain_stage_1.jsonl]. Data-Juicer CLI mode only supports local files w or w/o weights, or huggingface path
+Traceback (most recent call last):
+  File "/home/robot/lhp/miniconda3/envs/Syn0625/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/robot/lhp/miniconda3/envs/Syn0625/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/data-juicer/tools/process_data.py", line 35, in <module>
+    main()
+  File "/home/robot/.local/lib/python3.10/site-packages/loguru/_logger.py", line 1297, in catch_wrapper
+    return function(*args, **kwargs)
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/data-juicer/tools/process_data.py", line 25, in main
+    executor = DefaultExecutor(cfg)
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/data-juicer/data_juicer/core/executor/default_executor.py", line 56, in __init__
+    self.dataset_builder = DatasetBuilder(self.cfg,
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/data-juicer/data_juicer/core/data/dataset_builder.py", line 38, in __init__
+    ds_configs = rewrite_cli_datapath(cfg.dataset_path)
+  File "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/data-juicer/data_juicer/core/data/dataset_builder.py", line 213, in rewrite_cli_datapath
+    raise ValueError(
+ValueError: Unable to load the dataset from [./input/pretrain_stage_1/mgm_pretrain_stage_1.jsonl]. Data-Juicer CLI mode only supports local files w or w/o weights, or huggingface path

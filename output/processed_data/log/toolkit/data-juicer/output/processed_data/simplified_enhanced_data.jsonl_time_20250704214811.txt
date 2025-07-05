@@ -1,0 +1,3 @@
+2025-07-04 21:48:11.769 | WARNING  | data_juicer.config.config:init_setup_from_cfg:582 - dataset_path [input/pretrain_stage_1/mgm_pretrain_stage_1.jsonl] is not a valid local path, AND dataset is not present. Please check and retry, otherwise we will treat dataset_path as a remote dataset or a mixture of several datasets.
+2025-07-04 21:48:11.770 | DEBUG    | data_juicer.config.config:timing_context:35 - Initializing setup from config took 0.01 seconds
+error: Unrecognized arguments: --image_captioning_mapper.caption_key=blip2_caption

@@ -1,0 +1,266 @@
+{
+  "data_structure": {
+    "total_samples": 400000,
+    "analyzed_samples": 10000,
+    "field_counts": {
+      "id": 10000,
+      "text": 10000,
+      "images": 10000,
+      "_line_number": 10000
+    },
+    "field_types": {
+      "id": [
+        "str"
+      ],
+      "text": [
+        "str"
+      ],
+      "images": [
+        "list"
+      ],
+      "_line_number": [
+        "int"
+      ]
+    },
+    "missing_fields": []
+  },
+  "text_features": {
+    "total_texts": 400000,
+    "avg_word_length": 8.7848075,
+    "median_word_length": 8.0,
+    "std_word_length": 3.48934158372948,
+    "avg_char_length": 48.7648775,
+    "avg_sentence_count": 1.001275,
+    "empty_texts": 0,
+    "short_texts": 15497,
+    "long_texts": 0,
+    "unique_words": 30264,
+    "total_words_analyzed": 424157,
+    "top_words": [
+      [
+        "the",
+        26184
+      ],
+      [
+        "a",
+        25854
+      ],
+      [
+        "with",
+        12928
+      ],
+      [
+        "of",
+        11232
+      ],
+      [
+        "and",
+        10961
+      ],
+      [
+        "in",
+        10212
+      ],
+      [
+        "on",
+        6582
+      ],
+      [
+        "for",
+        5459
+      ],
+      [
+        "an",
+        4191
+      ],
+      [
+        "white",
+        3621
+      ],
+      [
+        "black",
+        2680
+      ],
+      [
+        "at",
+        2490
+      ],
+      [
+        "s",
+        2477
+      ],
+      [
+        "by",
+        2232
+      ],
+      [
+        "is",
+        2095
+      ],
+      [
+        "background",
+        1711
+      ],
+      [
+        "blue",
+        1703
+      ],
+      [
+        "red",
+        1546
+      ],
+      [
+        "logo",
+        1303
+      ],
+      [
+        "from",
+        1248
+      ],
+      [
+        "to",
+        1223
+      ],
+      [
+        "two",
+        1156
+      ],
+      [
+        "new",
+        1153
+      ],
+      [
+        "cover",
+        1101
+      ],
+      [
+        "green",
+        1059
+      ],
+      [
+        "shirt",
+        1054
+      ],
+      [
+        "photo",
+        971
+      ],
+      [
+        "it",
+        921
+      ],
+      [
+        "image",
+        906
+      ],
+      [
+        "top",
+        900
+      ],
+      [
+        "print",
+        885
+      ],
+      [
+        "front",
+        870
+      ],
+      [
+        "gold",
+        852
+      ],
+      [
+        "book",
+        841
+      ],
+      [
+        "set",
+        797
+      ],
+      [
+        "woman",
+        773
+      ],
+      [
+        "pink",
+        760
+      ],
+      [
+        "stock",
+        756
+      ],
+      [
+        "card",
+        718
+      ],
+      [
+        "man",
+        693
+      ],
+      [
+        "dress",
+        685
+      ],
+      [
+        "t",
+        682
+      ],
+      [
+        "table",
+        648
+      ],
+      [
+        "design",
+        646
+      ],
+      [
+        "yellow",
+        636
+      ],
+      [
+        "poster",
+        635
+      ],
+      [
+        "case",
+        615
+      ],
+      [
+        "silver",
+        611
+      ],
+      [
+        "illustration",
+        606
+      ],
+      [
+        "large",
+        586
+      ]
+    ],
+    "word_length_percentiles": {
+      "25th": 6.0,
+      "50th": 8.0,
+      "75th": 11.0,
+      "90th": 13.0,
+      "95th": 15.0
+    }
+  },
+  "image_features": {
+    "total_images_sampled": 50000,
+    "missing_images": 0,
+    "completion_rate": 100.0,
+    "avg_width": 402.06462,
+    "avg_height": 369.50448,
+    "avg_aspect_ratio": 1.131493590267227,
+    "size_distribution": {
+      "small": 0,
+      "medium": 44558,
+      "large": 5442
+    },
+    "format_distribution": {
+      "JPEG": 50000
+    },
+    "sample_size": 50000
+  }
+}

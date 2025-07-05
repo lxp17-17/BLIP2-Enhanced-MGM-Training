@@ -1,0 +1,54 @@
+# 基础的40万数据集处理配置 + BLIP2图像描述生成
+# 在基础过滤基础上添加图像描述增强功能
+
+project_name: 'blip2-enhanced-dataset-synthesis'
+dataset_path: '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/output/processed_data/basic_enhanced_data.jsonl'  # 使用之前过滤后的数据作为输入
+export_path: '/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/output/processed_data/blip2_enhanced_data.jsonl'
+
+# 基础配置
+np: 1  # 使用单进程避免GPU内存冲突
+text_keys: 'text'
+image_key: 'images'
+executor_type: default
+
+# 开启监控
+open_monitor: true
+open_tracer: true
+trace_num: 10
+
+# BLIP2图像描述生成 + 质量过滤流程
+process:
+  # 第一步：使用BLIP2生成丰富的图像描述
+  - image_captioning_mapper:
+      hf_img2seq: '/home/robot/.cache/modelscope/hub/models/goldsj/blip2-opt-2.7b'  # 使用你的本地BLIP2模型
+      keep_original_sample: false  # 只保留重新生成的描述，不保留原始描述
+      caption_num: 1  # 每张图片生成1个描述
+      batch_size: 1  # 减小批次大小节省内存
+      mem_required: 8  # 指定需要8GB GPU内存
+
+  # 第二步：过滤生成描述的质量
+  - words_num_filter:  # 过滤词数不在合理范围内的描述
+      lang: en
+      tokenization: false
+      min_num: 4   # 最少4个词
+      max_num: 50  # 最多50个词，比原来的24更宽松一些
+
+  - word_repetition_filter:  # 过滤词汇重复率过高的描述
+      lang: en
+      tokenization: false
+      rep_len: 1
+      min_ratio: 0.0
+      max_ratio: 0.3
+
+  # 第三步：图像质量过滤
+  - image_shape_filter:  # 确保图像尺寸合适
+      min_width: 335
+      max_width: 769
+      min_height: 335
+      max_height: 769
+      any_or_all: any
+
+  - image_watermark_filter:  # 过滤水印图像
+      hf_watermark_model: amrul-hzz/watermark_detector
+      prob_threshold: 0.8
+      any_or_all: any
