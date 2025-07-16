@@ -1,0 +1,24 @@
+{
+  "evaluation_config": {
+    "models": [
+      "MGM-2B-BLIP2-Finetune-blip2-enhanced-merged"
+    ],
+    "split": "mmbench_dev_20230712",
+    "gpu": "0",
+    "lora_mode": true,
+    "timestamp": "2025-07-09T20:26:07.491567"
+  },
+  "results": {
+    "MGM-2B-BLIP2-Finetune-blip2-enhanced-merged": {
+      "success": true,
+      "result_file": "/home/robot/lhp/projects/0625TCSyn/dj_synth_challenge/toolkit/../output/eval_results/MGM-2B-BLIP2-Finetune-blip2-enhanced-merged/mmbench/answers/mmbench_dev_20230712/MGM-2B-BLIP2-Finetune-blip2-enhanced-merged.jsonl",
+      "analysis": {
+        "total_questions": 0,
+        "model_responses": 0,
+        "avg_response_length": 0,
+        "sample_responses": []
+      },
+      "timestamp": "2025-07-09T20:26:07.491541"
+    }
+  }
+}

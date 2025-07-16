@@ -180,7 +180,8 @@ def main():
     parser.add_argument("--top_p", type=float, default=None)
     parser.add_argument("--num_beams", type=int, default=1)
     parser.add_argument("--max_new_tokens", type=int, default=128)
-    
+    parser.add_argument("--mmbench-mode", action="store_true", help="使用MMBench评估模式")
+
     args = parser.parse_args()
     
     print("🚀 LoRA TextVQA评估启动")
